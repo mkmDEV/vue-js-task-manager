@@ -117,4 +117,10 @@ li:hover {
   color: white;
   transition: 0.5s;
 }
+
+li:hover {
+  background: #4fc08d;
+  color: white;
+  transition: 0.5s;
+}
 </style>

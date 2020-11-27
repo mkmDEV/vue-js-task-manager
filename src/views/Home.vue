@@ -1,7 +1,20 @@
 <template>
   <div>
-    <h1>home</h1>
-    <p>{{ title }}</p>
+    <h1>{{ title }}</h1>
+    <ul>
+      <li
+        v-for="task in tasks"
+        :key="task.id"
+        :class="{ completed: task.completed }"
+      >
+        <input
+          @click="toggleCompleted(task.id)"
+          type="checkbox"
+          :checked="task.completed"
+        />
+        {{ task.name }} - {{ task.due }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -56,6 +69,35 @@ export default {
 
   methods: {
     //  komponens használata közben használt methodok
+    toggleCompleted(id) {
+      let task = this.tasks.find(task => task.id === id);
+      task.completed = !task.completed;
+    }
   }
 };
 </script>
+
+<style scoped>
+.completed {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+h1 {
+  background: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+li {
+  margin: 1rem;
+}
+</style>

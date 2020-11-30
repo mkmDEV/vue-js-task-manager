@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "First test task",
+    "completed": false,
+    "due": "2020-11-24"
+  },
+  {
+    "id": 2,
+    "name": "Second test task",
+    "completed": true,
+    "due": "2020-12-04"
+  },
+  {
+    "id": 3,
+    "name": "Third test task",
+    "completed": false,
+    "due": "2020-11-25"
+  },
+  {
+    "id": 4,
+    "name": "Fourth test task",
+    "completed": false,
+    "due": "2020-12-31"
+  }
+]

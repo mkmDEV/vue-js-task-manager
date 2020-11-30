@@ -1,16 +1,16 @@
 <template>
   <div>
-    <h1>{{ title }}</h1>
+    <h1>Home</h1>
     <ul>
       <li
-        v-for="task in tasks"
-        :key="task.id"
-        :class="{ completed: task.completed }"
+          v-for="task in tasks"
+          :key="task.id"
+          :class="{ completed: task.completed }"
       >
         <input
-          @click="toggleCompleted(task.id)"
-          type="checkbox"
-          :checked="task.completed"
+            :checked="task.completed"
+            type="checkbox"
+            @click="toggleCompleted(task.id)"
         />
         {{ task.name }} - {{ task.due }}
       </li>
@@ -19,59 +19,28 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: "home",
 
-  comments: {
-    //  Alkomponensek (child), amiket ez a komponens használ
-  },
-
   data() {
-    // statikus adatok
     return {
-      title: "Home",
-      tasks: [
-        {
-          id: 1,
-          name: "First test task",
-          completed: false,
-          due: "2020-11-24"
-        },
-        {
-          id: 2,
-          name: "Second test task",
-          completed: true,
-          due: "2020-12-04"
-        },
-        {
-          id: 3,
-          name: "Third test task",
-          completed: false,
-          due: "2020-11-25"
-        },
-        {
-          id: 4,
-          name: "Fourth test task",
-          completed: false,
-          due: "2020-12-31"
-        }
-      ]
+      tasks: [],
     };
   },
 
-  computed: {
-    //  dinamikus adatok
-  },
-
   created() {
-    //  ng oninit()
+    axios.get(process.env.VUE_APP_API_URL)
+        .then(response => this.tasks = response.data)
   },
 
   methods: {
-    //  komponens használata közben használt methodok
     toggleCompleted(id) {
       let task = this.tasks.find(task => task.id === id);
       task.completed = !task.completed;
+      axios.put(process.env.VUE_APP_API_URL, task)
+          .then(response => console.log(response.data))
     }
   }
 };
